@@ -241,7 +241,7 @@ If No keys are present, do the following:
     
 #### Create an account for the contract using cleos create account, with the command provided below. Don't forget to replace YOUR_PUBLIC_KEY with the public key you generated earlier.
 
-    cleos wallet import --private-key 5KQwrPbwdL6PhXujxW37FSSQZ1JiwsST4cqQzDeyXtP79zkvFD3  => This imports the eosio private key
+    cleos wallet import --private-key 5KQwrPbwdL6PhXujxW37FSSQZ1JiwsST4cqQzDeyXtP79zkvFD3  => This imports the eosio private key. If you get an error that keys exists already, just ignore.
     
     cleos create account eosio hello YOUR_PUBLIC_KEY -p eosio@active
     
