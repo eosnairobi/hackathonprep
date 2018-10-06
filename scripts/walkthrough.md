@@ -187,3 +187,75 @@ Installing eosio.cdt will make the compiled binary global so it can be accessabl
     A smart contract is bound to an entity, i.e A smart contract is associated to an account to which it has been deployed.
 
 ### Lets start. Will start with a hello world smart contract
+
+#### Navigate to your contracts folder within your project folder, and create a file `hello.cpp`.
+
+Write the following code into the file `hello.cpp`
+
+
+    // Include the required libraries into the file
+    // eosiolib/eosio.hpp loads the EOSIO C and C++ API into the scope of your contract
+    #include <eosiolib/eosio.hpp>
+    #include <eosiolib/print.hpp>
+
+    // To make things more concise in your contract use namespace eosio.
+    using namespace eosio;
+    
+    // Create a standard C++11 class. The contract class needs to extend eosio::contract.
+    class hello : public contract {
+    
+    // Add a public access specifier and a using-declaration.
+      public:
+          using contract::contract;
+           
+         
+          [[eosio::action]]
+          void hi( account_name user ) {
+             print( "Hello World, ", name{user} );
+          }
+          
+           // The above action accepts a parameter called user that's an account_name type.
+    };
+    
+    // Finally, we need to add the EOSIO_ABI macro to handle the dispatching of actions for the hello contract.
+    EOSIO_ABI( hello, (hi))
+    
+
+
+
+#### You can then compile the code to web assembly
+    eosio-cpp -o hello.wasm hello.cpp --abigen
+
+#### When a contract is deployed, it is deployed to an account, and the account becomes the interface for the contract. To keep things simple, we will reuse the same keys we created before.
+
+    NOTE:
+    When a contract is deployed, it is deployed to an account, and the account becomes the interface for the contract. 
+    As mentioned earlier these tutorials use the same public key for all of the accounts to keep things more simple.
+
+To check the keys available in your wallet, run
+    cleos wallet keys
+    
+If No keys are present, do the following:
+    cleos create key --to-console
+    cleos wallet import --private-key <PRIVATE_KEY>
+    
+#### Create an account for the contract using cleos create account, with the command provided below. Don't forget to replace YOUR_PUBLIC_KEY with the public key you generated earlier.
+
+    cleos wallet import --private-key 5KQwrPbwdL6PhXujxW37FSSQZ1JiwsST4cqQzDeyXtP79zkvFD3  => This imports the eosio private key
+    
+    cleos create account eosio hello YOUR_PUBLIC_KEY -p eosio@active
+    
+#### Now deploy the contract to the account hello
+    
+    cleos set contract hello <CONTRACTS_DIR>hello -p hello@active
+    
+    Replace "CONTRACTS_DIR" in the command below with the absolute path to your `contracts` directory.
+    
+    
+#### Try it out
+     cleos push action hello hi '["hello"]' -p hello@active
+    
+    
+    
+
+
