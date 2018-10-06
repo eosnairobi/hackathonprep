@@ -2,7 +2,7 @@
 
 ## 1. Setup Working Directory
 
-`mkdir hackathonprep && cd hackathonprep && mkdir contracts`
+`mkdir hackathonprep && cd hackathonprep && mkdir contracts && cd contracts`
 
 ### Then copy the absolute path to the contracts folder.
 
