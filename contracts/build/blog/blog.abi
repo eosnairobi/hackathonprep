@@ -1,0 +1,31 @@
+{
+    "____comment": "This file was generated with eosio-abigen. DO NOT EDIT Mon Oct  8 00:58:05 2018",
+    "version": "eosio::abi/1.0",
+    "structs": [
+        {
+            "name": "post",
+            "base": "",
+            "fields": [
+                {
+                    "name": "poster",
+                    "type": "name"
+                },
+                {
+                    "name": "content",
+                    "type": "string"
+                }
+            ]
+        }
+    ],
+    "types": [],
+    "actions": [
+        {
+            "name": "post",
+            "type": "post",
+            "ricardian_contract": ""
+        }
+    ],
+    "tables": [],
+    "ricardian_clauses": [],
+    "abi_extensions": []
+}
